@@ -1,34 +1,21 @@
-class BankAccount:
+class Student:
+  def __init__(self, name, roll_number, cgpa):
+      self.name = name
+      self.roll_number = roll_number
+      self.cgpa = cgpa
 
-    def __init__(self, account_number, account_holder_name, initial_balance=0.0):
-        self.__account_number = account_number
-        self.__account_holder_name = account_holder_name
-        self.__account_balance = initial_balance
+def sort_students(student_list):
+  sorted_students = sorted(student_list, key=lambda student: student.cgpa, reverse=True)
+  return sorted_students
 
-    def deposit(self, amount):
-        if amount > 0:
-            self.__account_balance += amount
-            print("Deposited {}. New balance: ₹{}".format(amount, self.__account_balance))
-        else:
-            print("Invalid deposit amount.")
+students = [
+  Student("hari", "001", 3.8),
+  Student("hema", "002", 3.5),
+  Student("gowtham", "003", 3.9),
+  Student("David", "004", 3.7),
+]
 
-    def withdraw(self, amount):
-        if amount > 0 and amount <= self.__account_balance:
-            self.__account_balance -= amount 
-            print("Withdrew {}. New balance: ₹{}".format(amount, self.__account_balance))
-        else:
-            print("Invalid withdrawal amount or insufficient balance.")
+sorted_students = sort_students(students)
 
-    def display_balance(self):
-        print("Account balance for {} (Account #{}): ₹{}".format(
-            self.__account_holder_name, self.__account_number, self.__account_balance))
-
-# Creating an account
-account = BankAccount(account_number="123456789", account_holder_name="Pavithra", initial_balance=5000.0)
-
-# Test deposit and withdrawal functionality
-account.display_balance()
-account.deposit(500.0)
-account.withdraw(200.0)
-account.withdraw(20000.0)
-account.display_balance()
+for student in sorted_students:
+  print("Name: {}, Roll Number: {}, CGPA: {}".format(student.name,student.roll_number,student.cgpa))
